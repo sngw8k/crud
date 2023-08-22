@@ -108,6 +108,17 @@ def index(request):
 
     return render(request, 'index.html', context)
 ```
+- 하나의 게시물 출력
+```python
+def index(request, id):
+    posts = Post.objects.get(id=id)
+
+    context = {
+        'post': posts,
+    }
+
+    return render(request, 'detail.html', context)
+```
 
 ### 2. Create
 
