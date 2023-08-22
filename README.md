@@ -3,9 +3,10 @@
 1. 프로젝트 폴더 생성
 
 2. 프로젝트 폴더로 이동 / vscode 실행
-    2.1 `.gitignore` , `README.md` 생성
+    - `.gitignore` , `README.md` 생성
 
 3. django 프로젝트 생성
+    - `<pjt-name>` 에는 생성하고 싶은 프로젝트의 이름을 작성합니다.
 ```bash
 django-admin startproject <pjt-name> .
 ```
