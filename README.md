@@ -122,6 +122,62 @@ def index(request, id):
 
 ### 2. Create
 
+- 사용자에게 입력 할 수 있는 폼을 제공
+```python
+def new(request):
+    return render(request, 'new.html')
+```
+
+- 사용자가 입력한 데이터를 가지고 DB에 저장하는 로직
+```python
+def create(request):
+    title = request.GET.get('title')
+    content = request.GET.get('content')
+
+    post = Post()
+    post.title = title
+    post.content = content
+    post.save()
+
+    return redirect(f'/posts/{post.id}/')
+```
 ### 3. Delete
 
+```python
+def delete(request, id):
+    post = Post.objects.get(id=id)
+    post.delete()
+
+    return redirect('/index/')
+```
+
 ### 4. Update
+
+- 기존의 정보를 담은 form을 제공
+```python
+def edit(request, id):
+    post = Post.objects.get(id=id)
+     context = {
+        'post': post,
+    }
+
+    return render(request, 'edit.html', context)
+```
+
+- 사용자가 입력한 새로운 정보를 가져와서
+- 기존정보에 덮어씌우기
+```python
+def update(request, id):
+    # 방금 수정한 데이터
+    title = request.GET.get('title')
+    content = request.GET.get('content')
+
+    # post = Post() => 새로운 게시물 만들때
+    # 기존데이터
+    post = Post.objects.get(id=id)
+    post.title = title
+    post.content = content
+    post.save()
+
+    return redirect(f'/posts/{post.id}/')
+```
